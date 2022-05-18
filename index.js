@@ -9,9 +9,13 @@ const io = new Server(server);
 const port = 3007
 const host = "localhost"
 
-app.get('/', (req, res) => {
+app.use('/chat', express.static('public'))
+
+app.get('/chat', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
+
+
 
 io.on('connection', (socket) => {
     console.log('a user connected');
