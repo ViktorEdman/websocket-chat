@@ -19,6 +19,7 @@ app.get('/chat', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('a user connected');
+    console.log(socket.handshake.headers["x-real-ip"]);
     socket.on('chat message', (msg) => {
       console.log('message: ' + msg);
       io.emit('chat message', msg);
