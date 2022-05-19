@@ -41,13 +41,21 @@
         messageInput.value = '';
       }
     });
-    
-    socket.on('chat message', function(msg) {
+
+    function addMessage(msg) {
       var item = document.createElement('li');
       item.textContent = msg;
       messages.appendChild(item);
       window.scrollTo(0, document.body.scrollHeight);
+    }
+    
+    socket.on('chat message', function(msg) {
+      addMessage(msg)
     });
+    socket.on('chat history', (msgHistory) => {
+      messages.innerHtml = ""
+      msgHistory.map(msg => addMessage(msg))
+    })
   </script>
 </body>
 </html>

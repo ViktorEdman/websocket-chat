@@ -15,13 +15,17 @@ app.get('/chat', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-
+const chatLog = []
 
 io.on('connection', (socket) => {
-    console.log('a user connected');
+    io.fetchSockets().then(sockets => console.log("Currently connected sockets", sockets.map(socket => socket.id)))
+    console.log('a user connected '+socket.id);
+    console.log(chatLog)
+    io.to(socket.id).emit('chat history', chatLog)
     console.log(socket.handshake.headers["x-real-ip"]);
     socket.on('chat message', (msg) => {
       console.log('message: ' + msg);
+      chatLog.push(msg)
       io.emit('chat message', msg);
     });
   });
