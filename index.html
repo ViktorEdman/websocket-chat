@@ -53,7 +53,7 @@
       addMessage(msg)
     });
     socket.on('chat history', (msgHistory) => {
-      messages.innerHtml = ""
+      messages.innerHTML = ""
       msgHistory.map(msg => addMessage(msg))
     })
   </script>
