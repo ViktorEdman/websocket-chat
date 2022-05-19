@@ -8,3 +8,5 @@ Future functionality
 
 - Persistent history over restarts
 - Private messaging
+
+Project is available at https://viktoredman.se/chat
