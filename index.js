@@ -28,7 +28,11 @@ function listConnections() {
     ))
 }
 
-const chatLog = []
+const chatLog = [
+  "Person: Detta är helt seriöst en riktig chattlog",
+  "Person2: Ja, precis, detta är inte alls sample data",
+  "Person: Tänk om vi bara är påhittade av admin? 😱"
+]
 
 io.on('connection', (socket) => {
     socket.IP = socket.handshake.headers["x-real-ip"];
@@ -40,7 +44,7 @@ io.on('connection', (socket) => {
     
     
     socket.on('chat message', (msg) => {
-      if (msg.includes('/clear') && msg.substr(0, 5).toLowerCase() === "admin") {
+      if (msg.toLowerCase() === "admin: /clear") {
           chatLog.length=0
           socket.emit("chat history", chatLog)
           return
