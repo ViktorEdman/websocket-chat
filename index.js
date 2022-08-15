@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
+const repl = require('node:repl')
 
 const { Server } = require("socket.io");
 const io = new Server(server);
@@ -31,7 +32,8 @@ function listConnections() {
 const chatLog = [
   "Person: Detta är helt seriöst en riktig chattlog",
   "Person2: Ja, precis, detta är inte alls sample data",
-  "Person: Tänk om vi bara är påhittade av admin? 😱"
+  "Person: Tänk om vi bara är påhittade av admin? 😱",
+  "Person3: Vad du än gör, logga inte in som admin och skriv /clear!!!!"
 ]
 
 io.on('connection', (socket) => {
@@ -60,3 +62,8 @@ io.on('connection', (socket) => {
 server.listen(port, () => {
   console.log(`listening on ${host}:${port}`);
 });
+
+repl.start({
+  prompt: "admin console>",
+  useGlobal: true
+})
