@@ -16,19 +16,6 @@ app.get('/chat', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 
-function listConnections() {
-  io.fetchSockets()
-  .then(sockets => console.log("Currently connected sockets", 
-    sockets.map(socket => {
-      return {
-                id: socket.id,
-                name: socket?.name,
-                ip: socket.IP,
-                connected: socket.connected}
-              })
-    ))
-}
-
 const chatLog = [
   "Person: Detta är helt seriöst en riktig chattlog",
   "Person2: Ja, precis, detta är inte alls sample data",
@@ -40,7 +27,6 @@ io.on('connection', (socket) => {
     socket.IP = socket.handshake.headers["x-real-ip"];
 
     console.log('a user connected '+socket.id);
-    listConnections();
     io.to(socket.id).emit('chat history', chatLog)
 
     
@@ -55,15 +41,9 @@ io.on('connection', (socket) => {
       console.log('message: ' + msg);
       chatLog.push(msg)
       io.emit('chat message', msg);
-      listConnections();
     });
   });
 
 server.listen(port, () => {
   console.log(`listening on ${host}:${port}`);
 });
-
-repl.start({
-  prompt: "admin console>",
-  useGlobal: true
-})
