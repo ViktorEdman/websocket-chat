@@ -1,0 +1,14 @@
+version: '3'
+services:
+  livechat:
+    build: .
+    container_name: livechat
+    command: node index.js
+    working_dir: /app
+    volumes:
+      - .:/app
+    networks:
+      - nginx-proxy-manager_default
+networks:
+  nginx-proxy-manager_default:
+    external: true

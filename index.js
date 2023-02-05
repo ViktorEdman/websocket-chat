@@ -6,8 +6,8 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
 
-const port = 3007
-const host = "localhost"
+const port = 3000
+const host = "0.0.0.0"
 
 app.use('/chat', express.static('public'))
 
