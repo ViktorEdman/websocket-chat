@@ -1,3 +1,5 @@
+[![trophy](https://github-profile-trophy.vercel.app/?username=ViktorEdman)](https://github.com/ryo-ma/github-profile-trophy)
+
 This is a proof of concept for live chat with socket.io
 Current functionality
 
